@@ -1,7 +1,14 @@
 {
   "name": "@honem/teletext-core",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Provider-agnostic teletext fetcher, cache, and topic API. Powers @honem/teletext-mcp and @honem/teletext-cli.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/honzanemecek/teletext.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/honzanemecek/teletext#readme",
+  "bugs": { "url": "https://github.com/honzanemecek/teletext/issues" },
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
