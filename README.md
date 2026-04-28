@@ -253,15 +253,7 @@ Exposed by the bundled MCP server `api` (`dist/server.js`). The full LLM-visible
 - **Per-broadcaster language.** Page text is returned verbatim in the broadcaster's language. Claude can translate or summarize as needed.
 - **Bulk fetch.** Both currently registered providers fetch all pages in one HTTP request and cache the snapshot for 60 s. SVT's source (texttv.nu) is a third-party aggregator, not a direct SVT endpoint.
 
-## Migration notes
-
-- **From v0.5.1 → v0.5.2:** the cache directory is now platform-aware. On macOS it moved from `~/.cache/teletext/` to `~/Library/Caches/teletext/`; on Windows from `~\.cache\teletext\` to `%LOCALAPPDATA%\teletext\Cache\`; on Linux it's unchanged (and now respects `XDG_CACHE_HOME`). Old caches at the previous paths are unread — `rm -rf ~/.cache/teletext` (macOS, only the leftover dir) is safe.
-- **From v0.4 → v0.5:** repo restructured into an Nx + npm-workspaces monorepo with three publishable packages — `@honem/teletext-core`, `@honem/teletext-mcp`, `@honem/teletext-cli`. The same MCP server is now installable in any MCP-capable client via `npx -y @honem/teletext-mcp` (no Claude Code required). The Claude Code plugin shell is unchanged at the user surface — slash commands, MCP tool names, and cache layout are identical, but `plugin/dist/{server,cli}.js` are now esbuild-bundled single-file outputs. If you previously consumed `src/lib.ts` directly, switch the import to `@honem/teletext-core`. After pulling, `npm install && npm run build`, then in Claude Code: `/plugin uninstall teletext@honem && /plugin install teletext@honem && /reload-plugins`.
-- **From v0.3 → v0.4:** MCP server renamed `teletext` → `api`; tools lost the `teletext_` prefix (`teletext_get_page` → `get_page`, etc.). LLM-visible tool path is now `mcp__plugin_teletext_api__<tool>` (no doubled "teletext"). Slash commands, CLI, and cache layout are unchanged. After updating the local repo, run `/plugin uninstall teletext@honem && /plugin install teletext@honem && /reload-plugins` to refresh the MCP tool registration.
-- **From v0.2 → v0.3:** the keying changed from ISO 639-1 *language code* (`cs`) to short *broadcaster code* (`ct`, `svt`). The slash command went from `/teletext:cs` to `/teletext:ct`; the CLI flag went from `--country=cs` to `--provider=ct`. The MCP tool argument is now `provider` (was `country`). The cache directory `~/.cache/teletext/cs/` is unused — safe to `rm -rf`.
-- **From v0.1 (`ct-teletext`):** the plugin was renamed `teletext`; install slug is `/plugin install teletext@honem`. The cache directory `~/.cache/ct-teletext/` is unused — safe to `rm -rf`.
-
-### About the `teletext@honem` install slug
+## About the `teletext@honem` install slug
 
 `<plugin>@<marketplace>` is the only valid install syntax in Claude Code — the `@` and the marketplace name are mandatory by design (no implicit resolution, no fuzzy match). The plugin itself is named **`teletext`**; **`honem`** is the marketplace (a personal namespace where future plugins can sit alongside `teletext`). So `teletext@honem` is already the shortest possible install slug.
 
