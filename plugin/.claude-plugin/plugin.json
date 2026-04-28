@@ -1,0 +1,11 @@
+{
+  "name": "teletext",
+  "version": "0.5.0",
+  "description": "Read teletext from public broadcasters (ČT, …) — slash commands + MCP server.",
+  "author": {
+    "name": "honem",
+    "email": "development@honzanemecek.cz"
+  },
+  "license": "MIT",
+  "keywords": ["teletext", "ceska-televize", "czech-tv", "news", "mcp", "broadcast"]
+}

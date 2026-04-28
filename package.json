@@ -1,0 +1,27 @@
+{
+  "name": "teletext-workspace",
+  "version": "0.5.1",
+  "description": "Teletext for AI agents — Nx monorepo: @honem/teletext-core (lib), @honem/teletext-mcp (MCP server), @honem/teletext-cli (CLI), plus the Claude Code plugin shell.",
+  "type": "module",
+  "author": "honem <development@honzanemecek.cz>",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "tsc -b && node scripts/bundle-plugin.mjs",
+    "build:packages": "tsc -b",
+    "build:plugin": "node scripts/bundle-plugin.mjs",
+    "typecheck": "tsc -b --noEmit",
+    "clean": "tsc -b --clean && rm -rf plugin/dist"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "esbuild": "^0.24.0",
+    "nx": "^20.0.0",
+    "typescript": "^5.6.0"
+  },
+  "license": "MIT"
+}

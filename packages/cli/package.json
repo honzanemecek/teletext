@@ -1,0 +1,22 @@
+{
+  "name": "@honem/teletext-cli",
+  "version": "0.5.1",
+  "description": "Command-line interface for teletext from public broadcasters (ČT, SVT, …). Run with `npx -y @honem/teletext-cli`.",
+  "type": "module",
+  "bin": {
+    "teletext": "./dist/cli.js"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && chmod +x dist/cli.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@honem/teletext-core": "^0.5.1"
+  },
+  "keywords": ["cli", "teletext", "broadcast", "ceska-televize", "svt"],
+  "author": "honem <development@honzanemecek.cz>",
+  "license": "MIT",
+  "engines": { "node": ">=18" }
+}

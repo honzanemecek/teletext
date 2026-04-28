@@ -1,0 +1,11 @@
+node_modules/
+*.log
+.DS_Store
+
+# Per-package build outputs (only plugin/dist/ is committed for offline install)
+packages/*/dist/
+packages/*/*.tsbuildinfo
+*.tsbuildinfo
+
+# Nx cache
+.nx/

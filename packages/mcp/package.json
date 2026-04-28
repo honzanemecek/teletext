@@ -1,0 +1,22 @@
+{
+  "name": "@honem/teletext-mcp",
+  "version": "0.5.1",
+  "description": "MCP (Model Context Protocol) server for teletext from public broadcasters. Works with Claude Desktop, Cursor, VS Code, Continue, Goose, Windsurf, Codex CLI, and any other MCP-capable client.",
+  "type": "module",
+  "bin": {
+    "teletext-mcp": "./dist/server.js"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && chmod +x dist/server.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@honem/teletext-core": "^0.5.1"
+  },
+  "keywords": ["mcp", "model-context-protocol", "teletext", "broadcast", "ceska-televize", "svt"],
+  "author": "honem <development@honzanemecek.cz>",
+  "license": "MIT",
+  "engines": { "node": ">=18" }
+}
