@@ -1,5 +1,7 @@
 # Teletext for AI agents
 
+> *Long live teletext!*
+
 [![npm](https://img.shields.io/npm/v/%40honem%2Fteletext-mcp?label=%40honem%2Fteletext-mcp)](https://www.npmjs.com/package/@honem/teletext-mcp)
 [![npm](https://img.shields.io/npm/v/%40honem%2Fteletext-cli?label=%40honem%2Fteletext-cli)](https://www.npmjs.com/package/@honem/teletext-cli)
 [![npm](https://img.shields.io/npm/v/%40honem%2Fteletext-core?label=%40honem%2Fteletext-core)](https://www.npmjs.com/package/@honem/teletext-core)
