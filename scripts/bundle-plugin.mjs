@@ -4,7 +4,7 @@
 // remain offline-friendly (no npm fetch on first run).
 
 import { build } from "esbuild";
-import { mkdir, chmod, rm } from "node:fs/promises";
+import { mkdir, chmod, rm, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -27,6 +27,14 @@ const targets = [
 
 await rm(outDir, { recursive: true, force: true });
 await mkdir(outDir, { recursive: true });
+
+// Tell Node these bundles are ESM. The plugin directory has no package.json
+// of its own (it isn't an npm package), so without this hint Node treats
+// dist/*.js as CommonJS and chokes on the import statements.
+await writeFile(
+  resolve(outDir, "package.json"),
+  JSON.stringify({ type: "module" }, null, 2) + "\n",
+);
 
 for (const t of targets) {
   await build({
