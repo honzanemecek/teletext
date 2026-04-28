@@ -1,6 +1,6 @@
 {
   "name": "teletext",
-  "version": "0.5.3",
+  "version": "1.0.0",
   "description": "Read teletext from public broadcasters (ČT, …) — slash commands + MCP server.",
   "author": {
     "name": "honem",

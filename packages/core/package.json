@@ -1,6 +1,6 @@
 {
   "name": "@honem/teletext-core",
-  "version": "0.5.3",
+  "version": "1.0.0",
   "description": "Provider-agnostic teletext fetcher, cache, and topic API. Powers @honem/teletext-mcp and @honem/teletext-cli.",
   "repository": {
     "type": "git",
