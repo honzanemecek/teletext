@@ -192,11 +192,15 @@ When a second provider is registered, the MCP `provider` argument becomes requir
 
 ## What gets written to disk
 
-| Path | Size | Purpose |
-|------|------|---------|
-| `~/.cache/teletext/<code>/latest.json` | ~1–5 MB per broadcaster | Single-file cache of that broadcaster's current snapshot. Overwritten in place. |
+One file per broadcaster, per OS conventions:
 
-That's it. Nothing else is written. The cache TTL is 60 seconds. Use `/teletext:<code> refresh` to force a re-fetch.
+| Platform | Path | Source |
+|----------|------|--------|
+| Linux    | `$XDG_CACHE_HOME/teletext/<code>/latest.json` (defaults to `~/.cache/teletext/<code>/latest.json`) | XDG Base Directory spec |
+| macOS    | `~/Library/Caches/teletext/<code>/latest.json` | Apple File System Programming Guide |
+| Windows  | `%LOCALAPPDATA%\teletext\Cache\<code>\latest.json` | Windows Known Folders |
+
+~1–5 MB per broadcaster, overwritten in place. Cache TTL is 60 seconds. Use `/teletext:<code> refresh` (or the `refresh` MCP tool) to force a re-fetch. Nothing else is written.
 
 ## Topics (per broadcaster)
 
@@ -251,6 +255,7 @@ Exposed by the bundled MCP server `api` (`dist/server.js`). The full LLM-visible
 
 ## Migration notes
 
+- **From v0.5.1 → v0.5.2:** the cache directory is now platform-aware. On macOS it moved from `~/.cache/teletext/` to `~/Library/Caches/teletext/`; on Windows from `~\.cache\teletext\` to `%LOCALAPPDATA%\teletext\Cache\`; on Linux it's unchanged (and now respects `XDG_CACHE_HOME`). Old caches at the previous paths are unread — `rm -rf ~/.cache/teletext` (macOS, only the leftover dir) is safe.
 - **From v0.4 → v0.5:** repo restructured into an Nx + npm-workspaces monorepo with three publishable packages — `@honem/teletext-core`, `@honem/teletext-mcp`, `@honem/teletext-cli`. The same MCP server is now installable in any MCP-capable client via `npx -y @honem/teletext-mcp` (no Claude Code required). The Claude Code plugin shell is unchanged at the user surface — slash commands, MCP tool names, and cache layout are identical, but `plugin/dist/{server,cli}.js` are now esbuild-bundled single-file outputs. If you previously consumed `src/lib.ts` directly, switch the import to `@honem/teletext-core`. After pulling, `npm install && npm run build`, then in Claude Code: `/plugin uninstall teletext@honem && /plugin install teletext@honem && /reload-plugins`.
 - **From v0.3 → v0.4:** MCP server renamed `teletext` → `api`; tools lost the `teletext_` prefix (`teletext_get_page` → `get_page`, etc.). LLM-visible tool path is now `mcp__plugin_teletext_api__<tool>` (no doubled "teletext"). Slash commands, CLI, and cache layout are unchanged. After updating the local repo, run `/plugin uninstall teletext@honem && /plugin install teletext@honem && /reload-plugins` to refresh the MCP tool registration.
 - **From v0.2 → v0.3:** the keying changed from ISO 639-1 *language code* (`cs`) to short *broadcaster code* (`ct`, `svt`). The slash command went from `/teletext:cs` to `/teletext:ct`; the CLI flag went from `--country=cs` to `--provider=ct`. The MCP tool argument is now `provider` (was `country`). The cache directory `~/.cache/teletext/cs/` is unused — safe to `rm -rf`.

@@ -9,7 +9,22 @@ import type {
   TopicTable,
 } from "./providers/types.js";
 
-const ROOT_CACHE_DIR = join(homedir(), ".cache", "teletext");
+function defaultCacheRoot(): string {
+  if (process.platform === "win32") {
+    const localAppData =
+      process.env.LOCALAPPDATA ?? join(homedir(), "AppData", "Local");
+    return join(localAppData, "teletext", "Cache");
+  }
+  if (process.platform === "darwin") {
+    return join(homedir(), "Library", "Caches", "teletext");
+  }
+  return join(
+    process.env.XDG_CACHE_HOME ?? join(homedir(), ".cache"),
+    "teletext",
+  );
+}
+
+const ROOT_CACHE_DIR = defaultCacheRoot();
 const DEFAULT_CACHE_TTL_MS = 60_000;
 const DEFAULT_FETCH_TIMEOUT_MS = 15_000;
 const DEFAULT_INDEX_PAGE = "100";
