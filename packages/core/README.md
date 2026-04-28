@@ -36,7 +36,7 @@ await api.refresh();               // bust the 60s cache
 
 ## Adding your own broadcaster
 
-Implement the `Provider` interface from `providers/types.ts`, plug it into the registry, and the MCP server + CLI pick it up automatically. See the [main README](https://github.com/honem/ct-teletext-plugin#adding-a-broadcaster) for the four-step recipe.
+Implement the `Provider` interface from `providers/types.ts`, plug it into the registry, and the MCP server + CLI pick it up automatically. See the [main README](https://github.com/honzanemecek/teletext#adding-a-broadcaster) for the four-step recipe.
 
 ## License
 

@@ -159,7 +159,7 @@ npx -y @honem/teletext-cli --provider=ct help
 The plugin bundles the MCP server + a CLI + slash commands — single install, offline-friendly (no `npx` cold-start latency, no network at startup).
 
 ```text
-/plugin marketplace add <github-user>/teletext
+/plugin marketplace add honzanemecek/teletext
 /plugin install teletext@honem
 ```
 
