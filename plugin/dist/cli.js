@@ -4,7 +4,17 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { homedir } from "node:os";
-var ROOT_CACHE_DIR = join(homedir(), ".cache", "teletext");
+function defaultCacheRoot() {
+  if (process.platform === "win32") {
+    const localAppData = process.env.LOCALAPPDATA ?? join(homedir(), "AppData", "Local");
+    return join(localAppData, "teletext", "Cache");
+  }
+  if (process.platform === "darwin") {
+    return join(homedir(), "Library", "Caches", "teletext");
+  }
+  return join(process.env.XDG_CACHE_HOME ?? join(homedir(), ".cache"), "teletext");
+}
+var ROOT_CACHE_DIR = defaultCacheRoot();
 var DEFAULT_CACHE_TTL_MS = 6e4;
 var DEFAULT_FETCH_TIMEOUT_MS = 15e3;
 var DEFAULT_INDEX_PAGE = "100";

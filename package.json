@@ -1,6 +1,6 @@
 {
   "name": "teletext-workspace",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Teletext for AI agents — Nx monorepo: @honem/teletext-core (lib), @honem/teletext-mcp (MCP server), @honem/teletext-cli (CLI), plus the Claude Code plugin shell.",
   "type": "module",
   "author": "honem <development@honzanemecek.cz>",
